@@ -1,0 +1,31 @@
+#points_table {
+    float: right;
+    margin-right: 5%;
+    margin-top: -15%;
+    width: 50%;
+}
+
+#result_table {
+    border: 5px solid pink;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    display: block;
+    max-height: 400px;
+    overflow: auto;
+    padding: 0;
+    /*vertical-align: center;*/
+
+}
+
+#result_table th, #result_table td {
+    border: 1px solid darkgrey;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    width: 1%;
+
+}
+
+#result_table th {
+    background-color: pink;
+}

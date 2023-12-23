@@ -1,0 +1,15 @@
+#svg {
+    border: 5px solid pink;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    height: 300px;
+    width: 300px;
+
+}
+
+#graph {
+    float: left;
+    margin-left: 10%;
+    margin-top: 2%;
+    width: 20%;
+}

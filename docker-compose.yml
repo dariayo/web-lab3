@@ -1,0 +1,17 @@
+version: '3.0'
+
+services:
+  localhost:
+    container_name: localhost
+    image: postgres:alpine
+    ports:
+      - '5432:5432'
+    environment:
+      - 'POSTGRES_USER=root'
+      - 'POSTGRES_DB=test'
+      - 'POSTGRES_PASSWORD=123'
+
+  backend:
+    build: .
+    ports:
+      - '8080:8080'

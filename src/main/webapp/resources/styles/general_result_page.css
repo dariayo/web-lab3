@@ -1,0 +1,58 @@
+* {
+    background: #e59b9b;
+    font-family: serif;
+}
+
+header {
+    color: white;
+    background: pink;
+    border: black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    font-size: 30px;
+    margin-bottom: 50px;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    text-align: center;
+    text-shadow: 2px 0 black,
+    0 -2px black,
+    -2px 0 black,
+    0 2px black;
+
+}
+
+#result_table {
+    border: 5px solid pink;
+    border-collapse: collapse;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    padding: 0;
+    width: 100%;
+}
+
+#result_table th, #result_table td {
+    border: 1px solid black;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+
+}
+
+#result_table th {
+    background-color: pink;
+}
+
+.button {
+    align-items: center;
+    background-color: white;
+    border: 5px solid pink;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    margin-left: 38%;
+    margin-right: 38%;
+    margin-top: 10px;
+    padding: 10px 20px;
+}

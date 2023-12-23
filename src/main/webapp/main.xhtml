@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+    <title>lab3</title>
+    <h:outputStylesheet library="styles" name="general.css"/>
+    <h:outputStylesheet library="styles" name="form.css"/>
+    <h:outputStylesheet library="styles" name="graph.css"/>
+    <h:outputStylesheet library="styles" name="result_table.css"/>
+</h:head>
+
+<h:body>
+    <div id="title">
+        <p>Shevchenko Daria. Lab №3. Var 876</p>
+    </div>
+    <div id="graph">
+        <ui:include id="Graph" src="/resources/svg/graph.svg"/>
+    </div>
+
+    <div id="form">
+        <h:form name="point_coordinates" id="point_coordinates" method="GET" action="#">
+            <fieldset>
+                <p>X:
+                    <p:inputText id="XValue" name="x" value="#{pointData.coordinateX}" decimalSeparator="."
+                                 required="true"
+                                 validatorMessage=" x is not between the expected values of -5 and 5"
+                                 requiredMessage=" x is required" placeholder="from -5 till 5"
+                                 styleClass="X">
+<!--                        <f:validateDoubleRange minimum="-5" maximum="5" validatorId="xValidator"/>-->
+                        <f:ajax execute="@this" render="x"
+                                listener="#{pointData.setCoordinateX(pointData.coordinateX)}"/>
+                    </p:inputText>
+                    <p:slider styleClass="slider" for="XValue" display="XValue" minValue="-5" maxValue="5" step="0.25"/>
+                    <br/>
+                    <h:message errorClass="error-label" for="XValue"/>
+                </p>
+                <p>Y:
+                    <h:inputText id="y" value="#{pointData.coordinateY}" a:placeholder="[-5;5]" onfocus="this.value=''"
+                                 lenght="4">
+                        <f:converter converterId="doubleConverter"/>
+                        <f:validator validatorId="yValidator"/>
+                    </h:inputText>
+
+
+                    <span><h:message for="y" style="color:red" id="y_error" rendered="true" showDetail="true"/></span>
+                </p>
+                <p>R:
+                    <p:inputNumber id="RValue" inputStyleClass="RValue" name="r_val" value="#{pointData.scaleR}"
+                                   decimalSeparator="." required="true"
+                                   validatorMessage=" r is not between the expected values of 2 and 5"
+                                   requiredMessage=" r is required" placeholder="from 2 till 5">
+                        <f:validateDoubleRange minimum="2" maximum="5"/>
+                        <f:ajax execute="@this" render="r" onevent="drawGraph(value)"/>
+<!--                        <f:validator validatorId="rValidator"/>-->
+                    </p:inputNumber>
+                    <p:slider styleClass="slider" for="RValue" minValue="2" maxValue="5" step="0.25"/>
+                </p>
+                <p>
+                    <h:commandButton value="Send" type="submit" id="submit_button">
+                        <f:ajax execute="@form" resetValues="false" render="result_table y_error x_error r_error"
+                                listener="#{pointsList.addPoint()}"/>
+                    </h:commandButton>
+                    <h:commandButton value="Clear" type="reset" id="clear_button">
+                        <f:ajax execute="@form" render="result_table" listener="#{pointsList.clearList()}"/>
+                    </h:commandButton>
+                </p>
+            </fieldset>
+        </h:form>
+        <h:form id="graphSelect">
+            <h:inputHidden id="graph_x" value="#{pointData.coordinateX}">
+            </h:inputHidden>
+            <h:inputHidden id="graph_y" value="#{pointData.coordinateY}">
+            </h:inputHidden>
+            <h:inputHidden id="graph_r" value="#{pointData.scaleR}">
+            </h:inputHidden>
+            <h:commandButton value="Send" type="submit" id="submit_from_graph_button" style="display: none;">
+                <f:ajax execute="@form" resetValues="false" render="result_table r_error"
+                        listener="#{pointsList.addPoint()}"/>
+            </h:commandButton>
+        </h:form>
+    </div>
+    <div id="points_table">
+        <h:dataTable id="result_table" value="#{pointsList.getPointsList()}" var="result">
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{result.coordinateX}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{result.coordinateY}
+            </h:column>
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{result.scaleR}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Result</f:facet>
+                #{result.isHit ? "True" : "False" }
+            </h:column>
+            <h:column>
+                <f:facet name="header">Current time</f:facet>
+                #{result.currentDate}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Runtime</f:facet>
+                #{result.scriptRunningTime}
+            </h:column>
+        </h:dataTable>
+        <h:link value="Start page" outcome="toIndex" styleClass="link_to_page"/>
+    </div>
+
+    <h:outputScript library="js" name="graph.js"/>
+    <ui:repeat value="#{pointsList.getPointsList()}" id="points" var="point">
+        <h:outputScript>createPoint(#{28*point.coordinateX+150}#{(28*point.coordinateY-150)*(-1)}#{point.scaleR});</h:outputScript>
+    </ui:repeat>
+    <h:outputScript library="js" name="form.js"/>
+</h:body>
+
+</html>
