@@ -12,14 +12,12 @@
     <h:outputStylesheet library="styles" name="general.css"/>
     <h:outputStylesheet library="styles" name="clock.css"/>
     <h:outputScript library="js" name="clock.js"/>
-    <h:outputScript library="js" name="clock.js"/>
-    <title id="dynamicTitle">Текущее время</title>
-
-    <!--    <link rel="icon" type="image/png" href="#{request.contextPath}/resources/favicon.png" />-->
+    <h:outputScript library="js" name="timer.js"/>
+    <title id="dynamicTitle">Start Page</title>
 
 </h:head>
 
-<h:body onload="clockTimer();">
+<h:body onload="clockTimer();timer();">
     <div id="title">
         <p>Shevchenko Daria. Lab №3. Var 876</p>
     </div>

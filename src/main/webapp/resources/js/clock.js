@@ -9,8 +9,8 @@ function clockTimer() {
 
     ctx.font = '20px serif';
     ctx.fillStyle = '#000000';
-    var time = new Date().getSeconds().toString();
-    ctx.fillText(time, 0, 20);
+    var time1 = new Date().getSeconds().toString();
+    ctx.fillText(time1, 0, 20);
 
     var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
     link.type = 'image/x-icon';
@@ -19,7 +19,6 @@ function clockTimer() {
 
     document.getElementsByTagName('head')[0].appendChild(link);
     setInterval(clockTimer, 1000);
-
 }
 
 
